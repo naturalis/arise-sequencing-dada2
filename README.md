@@ -15,7 +15,7 @@ There are differences in raw and merged data, between both error-learning (which
 ## cutadapt on R1 and R2
 In order to follow ["a Dada2 worklflow for Big data: paired-end" tutorial](https://benjjneb.github.io/dada2/bigdata_paired.html) primers were trimmed using cutadapt with a small shell-script (**autocutadapt.sh**)
 
-## figaro for detemining filter parameters
+## figaro
 Use Figaro to determine Truncation length (truncLen) and Maximum number of expected errors (maxEE) parameters. Be aware that although R1 and R2 reads may differ in length, all reads within R1 or R2 need to be of the same length. Also note that Figaro requires reads without primer sequences and no duplicates are allowed in sequence names.
 
 ## results
