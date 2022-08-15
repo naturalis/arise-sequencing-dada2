@@ -4,4 +4,29 @@
 Dada2 v.1.14 as part of the [make-otu-table](https://github.com/naturalis/galaxy-tool-make-otu-table) tool on the private [Galaxy server of Naturalis](https://galaxy.naturalis.nl) started to return memory allocation errors for larger (ie. Novaseq) datasets. Since future analyses of these datasets on Galaxy is still open for discussion, we wanted to test if Dada v.1.22 didn't have these issues. Current practice on our Galaxy platform is to merge R1 and R2 reads and subsequently trim primers and quality filter the merged reads. This contrasts the [Dada2 v.1.22 tutorial for paired-end data](https://benjjneb.github.io/dada2/bigdata_paired.html) in which quality filtering (and primer trimming) is done prior to merging of reads.
 
 ## data description
-The [first dataset](https://drive.google.com/file/d/1S6YhKIrnqzmqu4RxRjE0PZJ4fxpf7F5J/view?usp=sharing) consists of the raw data (unmerged, containing primers), whereas the [second dataset](https://drive.google.com/file/d/1iZPC4_vsBDPZnOexT8y0cP44vtmE0CYI/view?usp=sharing) has the reads merged (Flash) and the primers removed (Cutadapt) in Galaxy.
+The [first dataset](https://drive.google.com/file/d/1S6YhKIrnqzmqu4RxRjE0PZJ4fxpf7F5J/view?usp=sharing) consists of the raw data (unmerged, containing primers), whereas the [second dataset](https://drive.google.com/file/d/1iZPC4_vsBDPZnOexT8y0cP44vtmE0CYI/view?usp=sharing) has the reads merged (Flash) and the primers removed (Cutadapt) in Galaxy. The raw data consists of 576 gzipped fastq files (288 R1 and R2) representing demultiplexed Rbcl amplicons, still containing the primer sequences (forward = AGGTGAAGTTAAAGGTTCATACTTDAA, reverse = CCTTCTAATTTACCAACAACTG).
+
+## setting up a conda environment
+Analyses were done using a private [MaaS](https://maas.io/) (Metal as a Service) computing environment. Instructions for setting up a conda environment with Dada2 v.1.22 are given [here]()
+
+## expectation
+There are differences in raw and merged data, between both error-learing (which is done separately in R1 and R2 for raw data in Dada2) and primer removal (both need to be present and anchored in merged data in Galaxy). We expect error-learning on both R1 and R2 to be more accurate and likely result in less ASVs. Also we expect that most (if not all) of the higher abundance ASVs to be present in both datasets. For plants the expected length of the Rbcl amplicon is 263 nucleotides.
+
+## cutadapt on R1 and R2
+In order to follow ["a Dada2 worklflow for Big data: paired-end" tutorial](https://benjjneb.github.io/dada2/bigdata_paired.html) primers were trimmed using cutadapt with a small shell-script (**autocutadapt.sh**)
+
+## figaro for detemining filter parameters
+Use Figaro to determine Truncation length (truncLen) and Maximum number of expected errors (maxEE) parameters. Be aware that although R1 and R2 reads may differ in length, all reads within R1 or R2 need to be of the same length. Also note that Figaro requires reads without primer sequences and no duplicates are allowed in sequence names.
+
+## results
+Analysis of the raw data resulted in 2251 ASVs, of which 114 were longer than 263 nt.\
+Analysis of the merged data resulted in 2833 ASVs all of length 263.
+
+## data overlap
+2089 ASVs of the raw dataset were also present in the 2833 ASVs of the merged dataset.\
+162 ASVs of the raw dataset were missing from the 2833 ASVs of the merged dataset; of these 114 were larger than 263 nt and virually all represented bacterial sequences.\
+**check_presence.py** (compared lists only contain sequences, no headers)
+
+
+
+
