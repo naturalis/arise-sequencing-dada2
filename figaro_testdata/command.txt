@@ -1,0 +1,6 @@
+figaro.py -i /path/to/input_directory/ -o /path/to/output_directory/ -a 263 -f 27 -r 22 > /path/to/output_directory/stdout.log 
+
+# input_directory contains both R1 and R2 fastq.gz's
+# -a amplicon length without primers
+# -f length forward primer
+# -r length reverse primer
