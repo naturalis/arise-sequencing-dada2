@@ -7,7 +7,7 @@ Dada2 v.1.14 as part of the [make-otu-table](https://github.com/naturalis/galaxy
 The [first dataset](https://drive.google.com/file/d/1S6YhKIrnqzmqu4RxRjE0PZJ4fxpf7F5J/view?usp=sharing) consists of the raw data (unmerged, containing primers), whereas the [second dataset](https://drive.google.com/file/d/1iZPC4_vsBDPZnOexT8y0cP44vtmE0CYI/view?usp=sharing) has the reads merged (Flash) and the primers removed (Cutadapt) in Galaxy. The raw data consists of 576 gzipped fastq files (288 of each R1 and R2) representing demultiplexed Rbcl amplicons, still containing the primer sequences (forward = AGGTGAAGTTAAAGGTTCATACTTDAA, reverse = CCTTCTAATTTACCAACAACTG). For diatoms the expected length of the Rbcl amplicon is 263 nucleotides.
 
 ## setting up a conda environment
-Analyses were done using a private [MaaS](https://maas.io/) (Metal as a Service) computing environment. After installing a Conda package manager, an environment with Dada2, Cutadapt and Figaro ucan be created from the [yaml](https://github.com/naturalis/arise-sequencing-dada2/blob/main/arise-dada2.yml) file:\
+Analyses were done using a private [MaaS](https://maas.io/) (Metal as a Service) computing environment. After installing a Conda package manager, an environment with Dada2, Cutadapt and Figaro can be created from the [yaml](https://github.com/naturalis/arise-sequencing-dada2/blob/main/arise-dada2.yml) file:\
 `conda env create -n DADA2 -f arise-dada2.yml`
 
 ## expectation
