@@ -7,8 +7,8 @@ Dada2 v.1.14 as part of the [make-otu-table](https://github.com/naturalis/galaxy
 The [first dataset](https://drive.google.com/file/d/1S6YhKIrnqzmqu4RxRjE0PZJ4fxpf7F5J/view?usp=sharing) consists of the raw data (unmerged, containing primers), whereas the [second dataset](https://drive.google.com/file/d/1iZPC4_vsBDPZnOexT8y0cP44vtmE0CYI/view?usp=sharing) has the reads merged (Flash) and the primers removed (Cutadapt) in Galaxy. The raw data consists of 576 gzipped fastq files (288 R1 and R2) representing demultiplexed Rbcl amplicons, still containing the primer sequences (forward = AGGTGAAGTTAAAGGTTCATACTTDAA, reverse = CCTTCTAATTTACCAACAACTG). For diatoms the expected length of the Rbcl amplicon is 263 nucleotides.
 
 ## setting up a conda environment
-Analyses were done using a private [MaaS](https://maas.io/) (Metal as a Service) computing environment. After installing a Conda package manager, an environment with Dada2, Cutadapt and Figaro ucan be created from the [yaml]() file:
-`conda env create -n DADA2 -f arise-dada2.yml' 
+Analyses were done using a private [MaaS](https://maas.io/) (Metal as a Service) computing environment. After installing a Conda package manager, an environment with Dada2, Cutadapt and Figaro ucan be created from the [yaml]() file:\
+`conda env create -n DADA2 -f arise-dada2.yml`
 
 ## expectation
 There are differences in raw and merged data in respect to error-learning (which is done separately in R1 and R2 for raw data in Dada2) and primer removal (both need to be present and anchored in merged data in Galaxy). We expect error-learning on both R1 and R2 to be more accurate and likely result in less ASVs. Also we expect that most (if not all) of the higher abundance ASVs to be present in both datasets. 
@@ -29,7 +29,7 @@ Analysis of the merged data resulted in 2833 ASVs all of length 263.
 ## data overlap
 2089 ASVs of the raw dataset were also present in the 2833 ASVs of the merged dataset.\
 162 ASVs of the raw dataset were missing from the 2833 ASVs of the merged dataset; of these 114 were larger than 263 nt and virually all represented bacterial sequences.\
-**check_presence.py** (compared lists only contain sequences, no headers)
+[**check_presence.py**](https://github.com/naturalis/arise-sequencing-dada2/blob/main/check_presence.py) (compared lists only contain sequences, no headers)
 
 
 
