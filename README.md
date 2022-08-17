@@ -22,6 +22,12 @@ Use [Figaro](https://github.com/Zymo-Research/figaro#figaro) to determine Trunca
 
 ## dada2
 Dada2 requires reads without primer sequences and no duplicates are allowed before the first underscore in the name of the fastq files.
+For the first dataset (unmerged) we followed 'big data paired-end' tutorial, for the second dataset we followed the big data tutorial.
+Settings for filterAndTrim were identical in both cases.
+
+
+## export ASVs as fasta
+The uniquesToFasta(...) function of Dada2.
 
 ## results
 Analysis of the raw data resulted in 2251 ASVs, of which 114 were longer than 263 nt.\
@@ -32,6 +38,17 @@ Analysis of the merged data resulted in 2833 ASVs all of length 263.
 162 ASVs of the raw dataset were missing from the 2833 ASVs of the merged dataset; of these 114 were larger than 263 nt and virually all represented bacterial sequences.\
 [**check_presence.py**](https://github.com/naturalis/arise-sequencing-dada2/blob/main/check_presence.py) (compared lists only contain sequences, no headers)
 
+## filter on sequence length > 263 nt
+R\
+`MINLEN <- 263`\
+`MAXLEN <- 263`\
+`seqlens <- nchar(getSequences(st))`\
+`st.filt <- st[,seqlens >= MINLEN & seqlens <= MAXLEN]`
 
+## filter on ASV abundance
+R\
+`MINABUND <- 10`\
+`abundances <- colSums(st)`\
+`st.filt <- st[,abundances >= MINABUND]`
 
 
