@@ -14,7 +14,7 @@ Analyses were done using a private [MaaS](https://maas.io/) (Metal as a Service)
 There are differences in raw and merged data in respect to error-learning (which is done separately in R1 and R2 for raw data in Dada2) and primer removal (both need to be present and anchored in merged data in Galaxy). We expect error-learning on both R1 and R2 to be more accurate and likely result in less ASVs. Also we expect that most (if not all) of the higher abundance ASVs to be present in both datasets. 
 
 ## cutadapt on R1 and R2
-In order to follow "a Dada2 worklflow for Big data: [paired-end" tutorial](https://benjjneb.github.io/dada2/bigdata_paired.html), primer trimming was done in batch mode with Cutadapt using [auto_cutadapt.sh](https://github.com/naturalis/arise-sequencing-dada2/blob/main/auto_cutadapt.sh).\
+In order to follow the [paired-end tutorial](https://benjjneb.github.io/dada2/bigdata_paired.html) of Dada2 for Big data , primer trimming was done in batch mode with Cutadapt using [auto_cutadapt.sh](https://github.com/naturalis/arise-sequencing-dada2/blob/main/auto_cutadapt.sh).\
 `./auto_cutadapt.sh AGGTGAAGTTAAAGGTTCATACTTDAA CCTTCTAATTTACCAACAACTG`
 
 ## figaro
