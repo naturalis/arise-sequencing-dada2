@@ -28,29 +28,38 @@ Use [Figaro](https://github.com/Zymo-Research/figaro#figaro) to determine Trunca
 ## dada2
 Dada2 requires reads without primer sequences. Fastq filenames are split on underscores and the resulting basenames (the part before the first underscore) needs to be unique. In case of the example datasets the blancs (eBlanc_...) needed to be renamed. For the first dataset (unmerged) we followed the ['big data' tutorial](https://benjjneb.github.io/dada2/bigdata.html), for the second (merged) dataset we followed the ['big data: paired-end' tutorial](https://benjjneb.github.io/dada2/bigdata_paired.html). Parameters for filterAndTrim were identical in both cases.
 
-## export ASV table as csv
-The ASV table was exported with and without the removal of chimeras.
+### filter on sequence length
+`seqlens <- nchar(getSequences(seqtab.nochim))`\
+`seqtab.nochim.l263 <- seqtab.nochim[,seqlens == 263]`
 
-## export ASVs as fasta
-The uniquesToFasta(...) function of Dada2.
+### filter on ASV abundance
+`abundances <- colSums(seqtab.nochim.l263)`\
+`seqtab.nochim.l263.abgt100 <- seqtab.nochim.l263[,abundances >= 100]`
+
+### export ASVs as fasta
+The uniquesToFasta(...) function of Dada2.\
+`uniquesToFasta(getUniques(seqtab), fout="uniqueSeqs.fasta", ids=paste0("Seq", seq(length(getUniques(seqtab)))))`
 
 ## results
+|Dataset|Merging|Marker|ASVs|ASVs_nochimera|ASVs_nochim length_263|ASVs_nochim l263 abundance>100|
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+|unmerged|Dada2|RbcL|9595|2251|2137|1207|
+|merged|Flash|RbcL|14830|2833|2833|1220|
+
 Analysis of the raw data resulted in 2251 ASVs, of which 114 were longer than 263 nt.\
-Analysis of the merged data resulted in 2833 ASVs all of length 263.
+Analysis of the merged data resulted in 2833 ASVs all of length 263.\
+After filtering on abundance 100 or more, the number of ASVs was roughly similar.
 
 ## data overlap
 2089 ASVs of the raw dataset were also present in the 2833 ASVs of the merged dataset.\
 162 ASVs of the raw dataset were missing from the 2833 ASVs of the merged dataset; of these 114 were larger than 263 nt and virually all represented bacterial sequences.\
 [**check_presence.py**](https://github.com/naturalis/arise-sequencing-dada2/blob/main/check_presence.py) (compared lists only contain sequences, no headers)
+|Dataset|ASVs nochim l263 ab>100|in merged|in merged|in unmerged|in unmerged|
+|:---|:---:|:---:|:---:|:---:|:---:|
+|unmerged|1207|1163 present|44 missing|||
+|merged|1220|||1163 present|57 missing|
 
-## filter on sequence length
-R\
-`seqlens <- nchar(getSequences(seqtab.nochim))`\
-`seqtab.nochim.l263 <- seqtab.nochim[,seqlens == 263]`
 
-## filter on ASV abundance
-R\
-`abundances <- colSums(seqtab.nochim.l263)`\
-`seqtab.nochim.l263.ab+100 <- st[,abundances >= 100]`
+
 
 
