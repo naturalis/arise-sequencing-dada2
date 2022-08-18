@@ -46,8 +46,8 @@ The uniquesToFasta(...) function of Dada2.\
 |unmerged|Dada2|RbcL|9595|2251|2137|1207|
 |merged|Flash|RbcL|14830|2833|2833|1220|
 
-Analysis of the raw data resulted in 2251 ASVs, of which 114 were longer than 263 nt.\
-Analysis of the merged data resulted in 2833 ASVs all of length 263.\
+Analysis of the raw data resulted in 2251 ASVs, of which 114 were longer than 263 nt (truncLen 263 for either R1 or R2 can still result in merged reads exceeding 263).\
+Analysis of the merged data resulted in 2833 ASVs all of length 263 (resulting from Dada2 truncLen 263). \
 After filtering on abundance 100 or more, the number of ASVs was roughly similar.
 
 ## data overlap
