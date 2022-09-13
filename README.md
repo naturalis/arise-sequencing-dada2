@@ -26,7 +26,8 @@ In order to follow the [paired-end tutorial](https://benjjneb.github.io/dada2/bi
 Use [Figaro](https://github.com/Zymo-Research/figaro#figaro) to determine Truncation length (truncLen) and Maximum number of expected errors (maxEE) parameters (to be used with the filterAndTrim function of Dada2). Be aware that although R1 and R2 reads may differ in length, all reads within R1 or R2 need to be of the same length. The presence of shorter reads will also cause Figaro to fail; use Cutadapt with minimum and maximum length parameters. In this case we used Cutadapt with -l280 -m280 (=< 263 + shortest oligo). Also Figaro requires the input files to strictly adhire to Illumina naming standard (some_identifier_L001_R1.fastq.gz doesn't work; some_identifier_S1_L001_R1.fastq.gz does work). After analysing the [results](https://github.com/naturalis/arise-sequencing-dada2/tree/main/figaro_output) of sample E035 it was decided not to run Figaro for all samples, but use truncLen 263 and don't set maxEE and truncQ (which keeps them at their default values of 'inf' and '2' respectively).
 
 ## dada2
-Dada2 requires reads without primer sequences. Fastq filenames are split on underscores and the resulting basename (the part before the first underscore) needs to be unique. In case of the example datasets the blancs (eBlanc_...) needed to be renamed. For the first dataset (unmerged) we followed the ['big data' tutorial](https://benjjneb.github.io/dada2/bigdata.html), for the second (merged) dataset we followed the ['big data: paired-end' tutorial](https://benjjneb.github.io/dada2/bigdata_paired.html). Parameters for filterAndTrim were identical in both cases.
+Dada2 requires reads without primer sequences. Fastq filenames are split on underscores and the resulting basename (the part before the first underscore) needs to be unique. In case of the example datasets the blancs (eBlanc_...) needed to be renamed. For the first dataset (unmerged) we followed the ['big data: paired-end' tutorial](https://benjjneb.github.io/dada2/bigdata_paired.html), for the second (merged) dataset we followed the 
+['big data' tutorial](https://benjjneb.github.io/dada2/bigdata.html). Parameters for filterAndTrim were identical in both cases.
 
 ### filter on sequence length
 `seqlens <- nchar(getSequences(seqtab.nochim))`\
@@ -41,10 +42,10 @@ The uniquesToFasta(...) function of Dada2.\
 `uniquesToFasta(getUniques(seqtab), fout="uniqueSeqs.fasta", ids=paste0("Seq", seq(length(getUniques(seqtab)))))`
 
 ## results
-|Dataset|Merging|Marker|ASVs|ASVs_nochimera|ASVs_nochim length_263|ASVs_nochim l263 abundance>100|
+|Dataset|Merging_(env)|Marker|ASVs|ASVs_nochimera|ASVs_nochim length_263|ASVs_nochim l263 abundance>100|
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
-|unmerged|Dada2|RbcL|9595|2251|2137|1207|
-|merged|Flash|RbcL|14830|2833|2833|1220|
+|unmerged|Dada2_(MaaS)|RbcL|9595|2251|2137|1207|
+|merged|Flash_(Galaxy)|RbcL|14830|2833|2833|1220|
 
 Analysis of the raw data resulted in 2251 ASVs, of which 114 were longer than 263 nt (truncLen 263 for either R1 or R2 can still result in merged reads exceeding 263).\
 Analysis of the merged data resulted in 2833 ASVs all of length 263 (resulting from Dada2 truncLen 263). \
