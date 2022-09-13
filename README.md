@@ -42,23 +42,23 @@ The uniquesToFasta(...) function of Dada2.\
 `uniquesToFasta(getUniques(seqtab), fout="uniqueSeqs.fasta", ids=paste0("Seq", seq(length(getUniques(seqtab)))))`
 
 ## results
-|Dataset|Merging_(env)|Marker|ASVs|ASVs_nochimera|ASVs_nochim length_263|ASVs_nochim l263 abundance>100|
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|
-|unmerged|Dada2_(MaaS)|RbcL|9595|2251|2137|1207|
-|merged|Flash_(Galaxy)|RbcL|14830|2833|2833|1220|
+|Dataset|Initial|Merging_(env)|Marker|ASVs|ASVs_nochimera|ASVs_nochim length_263|ASVs_nochim l263 abundance>100|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|1.|unmerged|Dada2_(MaaS)|RbcL|9595|2251|2137|1207|
+|2.|merged|Flash_(Galaxy)|RbcL|14830|2833|2833|1220|
 
-Analysis of the raw data resulted in 2251 ASVs, of which 114 were longer than 263 nt (truncLen 263 for either R1 or R2 can still result in merged reads exceeding 263).\
-Analysis of the merged data resulted in 2833 ASVs all of length 263 (resulting from Dada2 truncLen 263). \
+Analysis of dataset 1 resulted in 2251 ASVs, of which 114 were longer than 263 nt (truncLen 263 both R1 and R2 can still result in merged reads exceeding 263).\
+Analysis of dataset 2 resulted in 2833 ASVs all of length 263 (using filterAndTrim with truncLen 263). \
 After filtering on abundance 100 or more, the number of ASVs was roughly similar.
 
 ## data overlap
-2089 ASVs of the raw dataset were also present in the 2833 ASVs of the merged dataset.\
-162 ASVs of the raw dataset were missing from the 2833 ASVs of the merged dataset; of these 114 were larger than 263 nt and virually all represented bacterial sequences.\
+2089 ASVs of dataset 1 were also present in the 2833 ASVs of the dataset 2.\
+162 ASVs of the dataset 1 were missing from the 2833 ASVs of the dataset 2; of these 114 were larger than 263 nt and virually all represented bacterial sequences.\
 [**check_presence.py**](https://github.com/naturalis/arise-sequencing-dada2/blob/main/check_presence.py) (compared lists only contain sequences, no headers)
-|Dataset|ASVs nochim l263 ab>100|in merged|in merged|in unmerged|in unmerged|
-|:---|:---:|:---:|:---:|:---:|:---:|
-|unmerged|1207|1163 present|44 missing|||
-|merged|1220|||1163 present|57 missing|
+|Dataset|Initial|ASVs nochim l263 ab>100|in merged|in merged|in unmerged|in unmerged|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|1.|unmerged|1207|1163 present|44 missing|||
+|2.|merged|1220|||1163 present|57 missing|
 
 
 
