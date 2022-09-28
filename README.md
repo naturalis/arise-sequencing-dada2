@@ -55,10 +55,10 @@ After filtering on abundance 100 or more, the number of ASVs was roughly similar
 2089 ASVs of dataset 1 were also present in the 2833 ASVs of the dataset 2.\
 162 ASVs of the dataset 1 were missing from the 2833 ASVs of the dataset 2; of these 114 were larger than 263 nt and virually all represented bacterial sequences.\
 [**check_presence.py**](https://github.com/naturalis/arise-sequencing-dada2/blob/main/check_presence.py) (compared lists only contain sequences, no headers)
-|Dataset|Initial|ASVs nochim l263 ab>100|in merged|in merged|in unmerged|in unmerged|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|1.|unmerged|1207|1163 present|44 missing|||
-|2.|merged|1220|||1163 present|57 missing|
+|Dataset|ASVs nochim l263 ab>100|Present in both|Unique to dataset|
+|:---:|:---:|:---:|:---:|
+|1.|1207|1163 |44|
+|2.|1220|1163 |57|
 
 
 
